@@ -89,3 +89,7 @@ def get_session(session_id: str):
             with open(matches[0], encoding="utf-8") as f:
                 return json.load(f)
     raise HTTPException(status_code=404, detail="Session not found")
+
+
+handler = app
+application = app
