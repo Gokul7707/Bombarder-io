@@ -1,7 +1,8 @@
 {
-  "rewrites": [
-    { "source": "/sessions", "destination": "/api" },
-    { "source": "/sessions/(.*)", "destination": "/api" },
-    { "source": "/health", "destination": "/api" }
+  "routes": [
+    { "handle": "filesystem" },
+    { "src": "/health", "dest": "/api" },
+    { "src": "/sessions", "dest": "/api" },
+    { "src": "/sessions/(.*)", "dest": "/api" }
   ]
 }

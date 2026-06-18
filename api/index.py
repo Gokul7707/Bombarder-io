@@ -33,15 +33,6 @@ class SessionPayload(BaseModel):
     events: Optional[List[Any]] = None
 
 
-@app.get("/")
-def root():
-    return {
-        "service": "EOD Training Session API",
-        "version": "2.0.0",
-        "endpoints": ["/sessions", "/sessions/{id}", "/health"],
-    }
-
-
 @app.get("/health")
 def health():
     return {"status": "ok", "timestamp": datetime.utcnow().isoformat()}
