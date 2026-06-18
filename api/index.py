@@ -33,12 +33,21 @@ class SessionPayload(BaseModel):
     events: Optional[List[Any]] = None
 
 
-@app.get("/health")
+@app.get("/api")
+def api_root():
+    return {
+        "service": "EOD Training Session API",
+        "version": "2.0.0",
+        "endpoints": ["/api/sessions", "/api/sessions/{id}", "/api/health"],
+    }
+
+
+@app.get("/api/health")
 def health():
     return {"status": "ok", "timestamp": datetime.utcnow().isoformat()}
 
 
-@app.post("/sessions")
+@app.post("/api/sessions")
 def create_session(payload: SessionPayload):
     sid = payload.session_summary.get("session_id", datetime.now().strftime("%Y%m%d_%H%M%S"))
     path = SESSIONS_DIR / f"api_{sid}.json"
@@ -49,7 +58,7 @@ def create_session(payload: SessionPayload):
     return {"ok": True, "session_id": sid, "path": str(path.name)}
 
 
-@app.get("/sessions")
+@app.get("/api/sessions")
 def list_sessions():
     files = sorted(SESSIONS_DIR.glob("*.json"), reverse=True)[:50]
     sessions = []
@@ -72,7 +81,7 @@ def list_sessions():
     return {"sessions": sessions}
 
 
-@app.get("/sessions/{session_id}")
+@app.get("/api/sessions/{session_id}")
 def get_session(session_id: str):
     for pattern in [f"api_{session_id}.json", f"eod_session_{session_id}.json", f"*{session_id}*.json"]:
         matches = list(SESSIONS_DIR.glob(pattern))

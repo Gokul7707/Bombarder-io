@@ -75,7 +75,7 @@ class SessionReporter:
         if not self.api_url or not HAS_URLLIB:
             return False
         try:
-            url = self.api_url.rstrip("/") + "/sessions"
+            url = self.api_url.rstrip("/") + "/api/sessions"
             data = json.dumps(report).encode("utf-8")
             req = urllib.request.Request(
                 url,

@@ -47,7 +47,7 @@
     </div>
   </main>
   <script>
-    fetch('/sessions').then(r => r.json()).then(data => {
+    fetch('/api/sessions').then(r => r.json()).then(data => {
       const tbody = document.getElementById('sessions');
       const sessions = data.sessions || [];
       document.getElementById('status').textContent = sessions.length
