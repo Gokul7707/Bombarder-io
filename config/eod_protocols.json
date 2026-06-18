@@ -1,0 +1,59 @@
+{
+  "framework": {
+    "name": "UN/IMAS EOD Training Framework",
+    "version": "1.0",
+    "reference": "IMAS 09.31 IEDD, STM-EOD Unit Manual, FBI Hazardous Devices School curriculum"
+  },
+  "five_cs": [
+    {"id": "confirm", "name": "CONFIRM", "description": "Confirm threat via reconnaissance and intelligence. Never assume device type."},
+    {"id": "clear", "name": "CLEAR", "description": "Clear non-essential personnel from blast radius. Establish minimum safe distance."},
+    {"id": "cordon", "name": "CORDON", "description": "Establish and maintain cordon. Control access points."},
+    {"id": "control", "name": "CONTROL", "description": "Designate incident commander. Maintain comms and accountability."},
+    {"id": "check", "name": "CHECK", "description": "Verify equipment, procedures, and team readiness before render-safe."}
+  ],
+  "nine_procedures": [
+    {"id": "detection", "name": "Detection", "phase": "pre_approach"},
+    {"id": "location", "name": "Location", "phase": "recon"},
+    {"id": "access", "name": "Access", "phase": "approach"},
+    {"id": "identification", "name": "Identification", "phase": "assessment"},
+    {"id": "evaluation", "name": "Evaluation", "phase": "planning"},
+    {"id": "render_safe", "name": "Render Safe (RSP)", "phase": "execution"},
+    {"id": "recovery", "name": "Recovery", "phase": "post_rsp"},
+    {"id": "reporting", "name": "Reporting", "phase": "debrief"},
+    {"id": "final_disposal", "name": "Final Disposal", "phase": "closure"}
+  ],
+  "rsp_principles": [
+    "Remote techniques are ALWAYS preferred over manual handling",
+    "No item is safe until fully disarmed — analyze the full explosive train",
+    "Interrupt firing circuit functions; do not rely on Hollywood wire-color rules alone",
+    "Maintain hands-off distance until remote tool is confirmed placed",
+    "Document every action for after-action report (AAR)"
+  ],
+  "wire_rulesets": {
+    "basic_rsp": {
+      "description": "Training module — circuit analysis based on observable indicators",
+      "rules": [
+        {"condition": "serial_parity_odd AND red_wire_present", "action": "cut", "target": "RED", "order": 1},
+        {"condition": "blue_wire_count >= 2", "action": "cut", "target": "BLUE", "target_index": "second", "order": 2},
+        {"condition": "no_yellow AND green_present", "action": "cut", "target": "GREEN", "order": 3},
+        {"condition": "single_wire_remaining", "action": "cut", "target": "last", "order": 99},
+        {"condition": "default", "action": "cut", "target": "alphabetical", "order": 100}
+      ]
+    },
+    "advanced_ied": {
+      "description": "Anti-tamper circuit — cutting ANY wire without remote tool triggers BOoby trap",
+      "requires_remote_tool": true,
+      "manual_cut_penalty": "detonation"
+    }
+  },
+  "grading_rubric": {
+    "pass_threshold": 70,
+    "categories": {
+      "protocol_compliance": {"weight": 0.20, "description": "Followed cordon and phase sequence"},
+      "teleop_readiness": {"weight": 0.25, "description": "Operator tremor/steadiness during remote RSP"},
+      "rsp_precision": {"weight": 0.25, "description": "Remote cutter accuracy on correct circuit"},
+      "decision_quality": {"weight": 0.15, "description": "Override AI / protocol decisions"},
+      "aar_reporting": {"weight": 0.15, "description": "Completed certification AAR"}
+    }
+  }
+}

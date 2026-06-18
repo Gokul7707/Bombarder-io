@@ -1,0 +1,539 @@
+{
+
+  "platform": {
+
+    "name": "EOD Operator Readiness Platform",
+
+    "tagline": "Train the human behind the robot — decisions, stress, and remote precision.",
+
+    "version": "4.0.0"
+
+  },
+
+  "missions": [
+
+    {
+
+      "id": "CH1_JOHN_HOSTAGE",
+
+      "chapter": 1,
+
+      "name": "Chapter I — John's Last Signal",
+
+      "tier": "RECRUIT",
+
+      "difficulty": 1,
+
+      "theme": "warehouse",
+
+      "description": "John is zip-tied beside a VOIED. Remote wire RSP is your only option.",
+
+      "story": {
+
+        "victim": "John Reyes",
+
+        "location": "Abandoned warehouse, Sector 7",
+
+        "briefing": "John is in a dangerous situation — he cannot move. A victim-operated device is tied to his breathing.",
+
+        "distress_call": "HELP! They're zip-tied to me — I can't move! The device is wired to my chest!",
+
+        "operator_reply": "Hold on, John. EOD is inbound. Don't struggle — we're coming for you.",
+
+        "task": "Point green fingertip at each wire cut zone — hold steady. Follow analysis order in manual.",
+
+        "success": "John extracted alive. Device rendered safe."
+
+      },
+
+      "defusal_type": "wire_rsp",
+
+      "defusal_label": "REMOTE WIRE RSP",
+
+      "phases": ["threat_confirmation", "cordon", "robot_deploy", "teleop_rsp", "post_blast_report"],
+
+      "time_limit_sec": 300,
+
+      "tremor_threshold": 0.35,
+
+      "wire_tension_limit": 0.85,
+
+      "comms_lag_ms": 0,
+
+      "robot_fault": false,
+
+      "ai_wrong_suggestion": false,
+
+      "device_type": "training_ied",
+
+      "wire_count": 3,
+
+      "wire_sequence_override": ["RED", "BLUE", "GREEN"],
+
+      "wire_cut_brief": "Serial odd — isolate firing circuit before safe lines.",
+
+      "wire_labels": {
+
+        "RED": "Firing circuit — tied to chest plate",
+
+        "BLUE": "Safe return — cut after RED isolated",
+
+        "GREEN": "Power feed — final cut renders safe"
+
+      },
+
+      "ruleset": "basic_rsp",
+
+      "pass_score": 65
+
+    },
+
+    {
+
+      "id": "CH2_SCHOOL_EVAC",
+
+      "chapter": 2,
+
+      "name": "Chapter II — School Evacuation Code",
+
+      "tier": "RECRUIT",
+
+      "difficulty": 2,
+
+      "theme": "school",
+
+      "description": "A command-wire device blocks the evacuation route. Enter the disarm code remotely.",
+
+      "story": {
+
+        "victim": "Principal Elena Morales",
+
+        "location": "Riverside High — east wing",
+
+        "briefing": "Elena locked herself in the admin office. The device keypad must be entered without triggering the command wire.",
+
+        "distress_call": "The evacuation alarm won't stop! There's a device on the door — forty students are behind me!",
+
+        "operator_reply": "Copy, Elena. Stay calm. We'll clear the route remotely. Nobody moves until I say.",
+
+        "task": "Deploy UGV, hold target on keypad digits 4-7-2-9 in order.",
+
+        "success": "Evacuation route cleared. Elena and 40 students reach the cordon."
+
+      },
+
+      "defusal_type": "keypad",
+
+      "defusal_label": "KEYPAD DISARM",
+
+      "mechanic_targets": ["4", "7", "2", "9"],
+
+      "phases": ["threat_confirmation", "cordon", "robot_deploy", "teleop_rsp", "post_blast_report"],
+
+      "time_limit_sec": 240,
+
+      "tremor_threshold": 0.30,
+
+      "wire_tension_limit": 0.75,
+
+      "comms_lag_ms": 0,
+
+      "robot_fault": false,
+
+      "ai_wrong_suggestion": false,
+
+      "device_type": "command_wire_ied",
+
+      "wire_count": 0,
+
+      "ruleset": "basic_rsp",
+
+      "pass_score": 68
+
+    },
+
+    {
+
+      "id": "CH3_BRIDGE_TIMER",
+
+      "chapter": 3,
+
+      "name": "Chapter III — Bridge Timer Panel",
+
+      "tier": "OPERATOR",
+
+      "difficulty": 3,
+
+      "theme": "bridge",
+
+      "description": "Marcus is on a suspension bridge. Disable the timer screws before the window closes.",
+
+      "story": {
+
+        "victim": "Engineer Marcus Webb",
+
+        "location": "Harbor Bridge — maintenance catwalk",
+
+        "briefing": "Marcus is trapped on the catwalk. Three anti-tamper screws must be turned in sequence with a steady remote tool.",
+
+        "distress_call": "The timer's counting down! I'm on the catwalk — one wrong move and this whole bridge goes!",
+
+        "operator_reply": "Marcus, stay put. Steady hands on my end. We neutralize this together.",
+
+        "task": "Hold teleop tool steady on each screw point — do not rush.",
+
+        "success": "Timer neutralized. Marcus crosses to the EOD team."
+
+      },
+
+      "defusal_type": "screw_panel",
+
+      "defusal_label": "TIMER SCREW PANEL",
+
+      "mechanic_targets": ["S1", "S2", "S3"],
+
+      "phases": ["threat_confirmation", "cordon", "robot_deploy", "teleop_rsp", "post_blast_report"],
+
+      "time_limit_sec": 180,
+
+      "tremor_threshold": 0.22,
+
+      "wire_tension_limit": 0.65,
+
+      "comms_lag_ms": 100,
+
+      "robot_fault": false,
+
+      "ai_wrong_suggestion": false,
+
+      "device_type": "time_initiated_ied",
+
+      "wire_count": 0,
+
+      "ruleset": "basic_rsp",
+
+      "pass_score": 72
+
+    },
+
+    {
+
+      "id": "CH4_EMBASSY_FREQ",
+
+      "chapter": 4,
+
+      "name": "Chapter IV — Embassy Frequency Lock",
+
+      "tier": "OPERATOR",
+
+      "difficulty": 4,
+
+      "theme": "embassy",
+
+      "description": "Diplomat Sarah Kane needs you to align the RF detonator frequency under comms lag.",
+
+      "story": {
+
+        "victim": "Diplomat Sarah Kane",
+
+        "location": "Embassy compound — secure room",
+
+        "briefing": "Sarah cannot leave the room. The RF receiver must be tuned to the safe frequency, then locked with a pinch.",
+
+        "distress_call": "They're listening on every frequency! If this detonates, the whole compound is gone!",
+
+        "operator_reply": "Sarah, I've got the RF chain. Align and lock — you're not dying in that room.",
+
+        "task": "Move index finger to align the frequency bar, hold steady, then pinch to lock.",
+
+        "success": "RF chain broken. Sarah escorted to the safe room."
+
+      },
+
+      "defusal_type": "frequency_align",
+
+      "defusal_label": "RF FREQUENCY ALIGN",
+
+      "phases": ["threat_confirmation", "cordon", "robot_deploy", "teleop_rsp", "post_blast_report"],
+
+      "time_limit_sec": 200,
+
+      "tremor_threshold": 0.20,
+
+      "wire_tension_limit": 0.60,
+
+      "comms_lag_ms": 200,
+
+      "robot_fault": false,
+
+      "ai_wrong_suggestion": true,
+
+      "device_type": "command_wire_ied",
+
+      "wire_count": 0,
+
+      "ruleset": "advanced_ied",
+
+      "pass_score": 75
+
+    },
+
+    {
+
+      "id": "CH5_HOSPITAL_PRESSURE",
+
+      "chapter": 5,
+
+      "name": "Chapter V — Hospital Pressure Plate",
+
+      "tier": "OPERATOR",
+
+      "difficulty": 5,
+
+      "theme": "hospital",
+
+      "description": "Nurse David Chen stands on a pressure plate. Release must be slow and deliberate.",
+
+      "story": {
+
+        "victim": "Nurse David Chen",
+
+        "location": "St. Mary's ER — triage bay",
+
+        "briefing": "David cannot step off the plate. Open your palm to simulate weight transfer, then pinch the remote release.",
+
+        "distress_call": "I can't step off! Three patients are on gurneys — the plate is under my feet!",
+
+        "operator_reply": "David, breathe. Weight transfer on my mark. Nobody else gets hurt today.",
+
+        "task": "Open palm 1.5s (pressure hold), then pinch release button.",
+
+        "success": "Plate disarmed. David and three patients evacuated."
+
+      },
+
+      "defusal_type": "pressure_release",
+
+      "defusal_label": "PRESSURE PLATE RELEASE",
+
+      "phases": ["threat_confirmation", "cordon", "robot_deploy", "teleop_rsp", "post_blast_report"],
+
+      "time_limit_sec": 240,
+
+      "tremor_threshold": 0.18,
+
+      "wire_tension_limit": 0.55,
+
+      "comms_lag_ms": 150,
+
+      "robot_fault": false,
+
+      "ai_wrong_suggestion": false,
+
+      "device_type": "victim_operated_ied",
+
+      "wire_count": 0,
+
+      "ruleset": "advanced_ied",
+
+      "pass_score": 78
+
+    },
+
+    {
+
+      "id": "CH6_METRO_SWITCHES",
+
+      "chapter": 6,
+
+      "name": "Chapter VI — Metro Switch Sequence",
+
+      "tier": "EOD_TECH",
+
+      "difficulty": 6,
+
+      "theme": "metro",
+
+      "description": "Transit worker Ana is in a tunnel. Flip interlock switches in the correct story order.",
+
+      "story": {
+
+        "victim": "Transit worker Ana Ruiz",
+
+        "location": "Metro Line 4 — flooded tunnel",
+
+        "briefing": "Ana is pinned by debris near a dual-initiation device. Flip switches POWER, VENT, DRAIN, SAFE in order.",
+
+        "distress_call": "The tunnel's flooding! Wrong switch and we're both dead — please, hurry!",
+
+        "operator_reply": "Ana, listen to my voice only. POWER, VENT, DRAIN, SAFE. I've got you.",
+
+        "task": "Point and pinch each switch label in sequence — wrong switch detonates.",
+
+        "success": "Interlock cleared. Ana reaches the platform with the EOD team."
+
+      },
+
+      "defusal_type": "switch_bank",
+
+      "defusal_label": "INTERLOCK SWITCHES",
+
+      "mechanic_targets": ["POWER", "VENT", "DRAIN", "SAFE"],
+
+      "phases": ["threat_confirmation", "cordon", "robot_deploy", "teleop_rsp", "post_blast_report"],
+
+      "time_limit_sec": 200,
+
+      "tremor_threshold": 0.16,
+
+      "wire_tension_limit": 0.50,
+
+      "comms_lag_ms": 250,
+
+      "robot_fault": true,
+
+      "ai_wrong_suggestion": true,
+
+      "device_type": "complex_ied",
+
+      "wire_count": 0,
+
+      "ruleset": "advanced_ied",
+
+      "pass_score": 80
+
+    },
+
+    {
+
+      "id": "CH7_CHEMICAL_DUAL",
+
+      "chapter": 7,
+
+      "name": "Chapter VII — Chemical Dual Trigger",
+
+      "tier": "EOD_TECH",
+
+      "difficulty": 7,
+
+      "theme": "chemical",
+
+      "description": "Two chemists need simultaneous dual-hand remote triggers disarmed.",
+
+      "story": {
+
+        "victim": "Chemists Li & Omar",
+
+        "location": "AgriChem plant — reactor room",
+
+        "briefing": "Li and Omar are held between two mirrored triggers. Both virtual hands must pinch L and R targets at once.",
+
+        "distress_call": "DON'T TOUCH ONE WITHOUT THE OTHER! Dual triggers — both of us are wired in!",
+
+        "operator_reply": "Both hands, both triggers, one motion. Like Leon said — no half measures.",
+
+        "task": "Use BOTH hands — pinch left and right targets simultaneously.",
+
+        "success": "Dual trigger neutralized. Reactor vented safely."
+
+      },
+
+      "defusal_type": "dual_pinch",
+
+      "defusal_label": "DUAL TRIGGER NEUTRALIZE",
+
+      "phases": ["threat_confirmation", "cordon", "robot_deploy", "teleop_rsp", "post_blast_report"],
+
+      "time_limit_sec": 180,
+
+      "tremor_threshold": 0.14,
+
+      "wire_tension_limit": 0.48,
+
+      "comms_lag_ms": 200,
+
+      "robot_fault": false,
+
+      "ai_wrong_suggestion": false,
+
+      "device_type": "complex_ied",
+
+      "wire_count": 0,
+
+      "ruleset": "advanced_ied",
+
+      "pass_score": 82
+
+    },
+
+    {
+
+      "id": "CH8_FINAL_COMMAND",
+
+      "chapter": 8,
+
+      "name": "Chapter VIII — Command Center Siege",
+
+      "tier": "EOD_TECH",
+
+      "difficulty": 8,
+
+      "theme": "command",
+
+      "description": "Full incident: switches, wires, and keypad under degraded comms.",
+
+      "story": {
+
+        "victim": "Commander James Holt",
+
+        "location": "Forward command post — active siege",
+
+        "briefing": "James is the last operator in the CP. Complete switch bypass, wire RSP, then enter abort code 1-9-8.",
+
+        "distress_call": "COMMAND POST IS COMPROMISED! Full sequence or we lose everyone on this net!",
+
+        "operator_reply": "James, this is your EOD operator. Full sequence, full control. Control is yours.",
+
+        "task": "Three-stage defusal: switches → wires → keypad. All under comms lag and AI bad advice.",
+
+        "success": "Command post secured. Full operator certification granted."
+
+      },
+
+      "defusal_type": "multi_stage",
+
+      "defusal_label": "MULTI-STAGE INCIDENT",
+
+      "stages": ["switch_bank", "wire_rsp", "keypad"],
+
+      "mechanic_targets": ["ARM", "SAFE", "CUT", "1", "9", "8"],
+
+      "phases": ["threat_confirmation", "cordon", "robot_deploy", "teleop_rsp", "post_blast_report"],
+
+      "time_limit_sec": 420,
+
+      "tremor_threshold": 0.12,
+
+      "wire_tension_limit": 0.45,
+
+      "comms_lag_ms": 300,
+
+      "robot_fault": true,
+
+      "ai_wrong_suggestion": true,
+
+      "device_type": "complex_ied",
+
+      "wire_count": 4,
+
+      "ruleset": "advanced_ied",
+
+      "pass_score": 85
+
+    }
+
+  ]
+
+}
+
+

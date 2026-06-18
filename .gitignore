@@ -1,0 +1,8 @@
+.venv/
+__pycache__/
+*.pyc
+reports/
+.env
+*.egg-info/
+models/*.task
+models/*.task.*

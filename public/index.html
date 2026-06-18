@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EOD Operator Readiness Platform</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: system-ui, sans-serif; background: #0a0c10; color: #e8eaed; min-height: 100vh; }
+    header { padding: 2.5rem 2rem; border-bottom: 1px solid #1e2430; }
+    h1 { font-size: 1.6rem; color: #00d4ff; font-weight: 600; }
+    .tagline { color: #8b949e; margin-top: 0.6rem; max-width: 640px; line-height: 1.5; }
+    main { padding: 2rem; max-width: 900px; margin: 0 auto; }
+    .card { background: #12161d; border: 1px solid #252b36; border-radius: 10px; padding: 1.5rem; margin-bottom: 1.25rem; }
+    h2 { font-size: 1rem; color: #c9d1d9; margin-bottom: 0.75rem; }
+    table { width: 100%; border-collapse: collapse; margin-top: 0.5rem; }
+    th, td { text-align: left; padding: 0.7rem; border-bottom: 1px solid #252b36; font-size: 0.9rem; }
+    th { color: #6e7681; font-weight: 500; }
+    .pass { color: #3fb950; }
+    .fail { color: #f85149; }
+    .badge { background: #21262d; padding: 0.15rem 0.5rem; border-radius: 4px; font-size: 0.8rem; }
+    ul { margin: 0.75rem 0 0 1.2rem; color: #8b949e; line-height: 1.7; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>EOD Operator Readiness Platform</h1>
+    <p class="tagline">Train the human behind the robot — decisions, stress, and remote precision. Local training runs via OpenCV teleop; sessions sync here.</p>
+  </header>
+  <main>
+    <div class="card">
+      <h2>Operator certification sessions</h2>
+      <p id="status" style="color:#8b949e;margin-bottom:0.5rem">Loading...</p>
+      <table>
+        <thead><tr><th>Session</th><th>Operation</th><th>Score</th><th>Grade</th><th>Result</th></tr></thead>
+        <tbody id="sessions"></tbody>
+      </table>
+    </div>
+    <div class="card">
+      <h2>Remote teleop pipeline</h2>
+      <ul>
+        <li>Threat confirmation → Cordon → Robot deploy → Teleop RSP → Post-blast AAR</li>
+        <li>Place fingertip target on buttons — hold to activate (no pinch for UI)</li>
+        <li>Pinch remains for in-mission teleop: wire cuts, keypad, dual-hand releases</li>
+        <li>Biometric calibration personalizes hand range on first launch</li>
+      </ul>
+    </div>
+  </main>
+  <script>
+    fetch('/sessions').then(r => r.json()).then(data => {
+      const tbody = document.getElementById('sessions');
+      const sessions = data.sessions || [];
+      document.getElementById('status').textContent = sessions.length
+        ? sessions.length + ' certification record(s)'
+        : 'No sessions yet — set EOD_API_URL when running glove.py locally';
+      tbody.innerHTML = sessions.map(s => `
+        <tr>
+          <td><span class="badge">${s.session_id}</span></td>
+          <td>${s.mission || '—'}</td>
+          <td>${s.score ?? '—'}</td>
+          <td>${s.grade || '—'}</td>
+          <td class="${s.passed ? 'pass' : 'fail'}">${s.passed ? 'CERTIFIED' : 'FAIL'}</td>
+        </tr>`).join('');
+    }).catch(() => { document.getElementById('status').textContent = 'API offline — deploy backend to Vercel'; });
+  </script>
+</body>
+</html>

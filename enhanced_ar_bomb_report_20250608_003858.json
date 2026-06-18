@@ -1,0 +1,28 @@
+{
+  "session_summary": {
+    "session_id": "20250608_003858",
+    "duration_minutes": 6.9948456962903345,
+    "difficulty_level": 1,
+    "missions_completed": 0,
+    "success_rate": 0
+  },
+  "performance_metrics": {
+    "average_stability": 0,
+    "average_stress": 0,
+    "wire_cutting_accuracy": 0.0
+  },
+  "game_data": {
+    "wire_configurations": [
+      "BLACK",
+      "BLUE",
+      "GREEN",
+      "WHITE"
+    ],
+    "correct_sequence": [
+      "GREEN",
+      "BLACK",
+      "BLUE"
+    ],
+    "wires_cut_correctly": 0
+  }
+}
